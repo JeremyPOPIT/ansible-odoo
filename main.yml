@@ -1,0 +1,38 @@
+---
+- name: "Install Odoo Community v10"
+  hosts: ODOO
+  remote_user: root
+  tasks:
+  - name: "Change locale to FR UTF8"
+    locale_gen:
+      name: fr_FR.UTF-8
+      state: present
+
+  - name:  "Shell commande Add Key repository Odoo"
+    shell: "wget -O - https://nightly.odoo.com/odoo.key | apt-key add -"
+
+  - name: "Add Repo Odoo"
+    apt_repository:
+      filename: odoo
+      repo: "deb http://nightly.odoo.com/10.0/nightly/deb/ ./"
+      state: present
+
+  - name: "Install Odoo Community 10"
+    apt:
+      name: odoo
+      state: present
+      update_cache: true
+      install_recommends: yes
+
+  - name: "Remove Odoo Community 10"
+    apt:
+      name: odoo
+      state: absent
+      update_cache: true
+      install_recommends: yes
+
+  - name: "Install Odoo Community 10"
+    apt:
+      name: odoo
+      state: present
+      update_cache: true

@@ -1,0 +1,11 @@
+---
+
+# Travis configuration
+
+dist: 'jessie'
+sudo: 'required'
+
+services:
+  - 'lxc'
+
+language: 'YAML'
